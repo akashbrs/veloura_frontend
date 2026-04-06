@@ -1,0 +1,4 @@
+Testing /api/login/ with {'username': 'testuser123', 'password': 'password123'}
+SUCCESS: {"message":"Login successful","access_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzc0Nzk1NTQ0LCJpYXQiOjE3NzQ3OTE5NDQsImp0aSI6ImNiODk3MGI0ZTYwNjRjMDViNmEyNWY2Mzc4OGFkZDRiIiwidXNlcl9pZCI6IjIifQ.VXdz9qQ07m_FZn3VhkDx15-M_ZUg974AbLwBur-CC5o","refresh_token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc3NDg3ODM0NCwiaWF0IjoxNzc0NzkxOTQ0LCJqdGkiOiI1YmYyZGZmODBjYTU0ZjFhOTMyMzhkOGZhOTVlODU0NSIsInVzZXJfaWQiOiIyIn0.nxKNtTBCNVcOMafICAKAHc2gN3qeLgxGQcN51fFlHEc","username":"testuser123"}
+Testing /api/signup/ with {'username': 'testuser123', 'email': 'testuser123@example.com', 'password': 'password123'}
+ERROR: 400 {"username":["A user with that username already exists."],"email":["user with this email already exists."]}

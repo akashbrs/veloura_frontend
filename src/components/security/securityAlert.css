@@ -1,0 +1,285 @@
+/* ==========================================================================
+   VELOURA — Enhanced Security Alert Popup
+   ========================================================================== */
+
+/* Overlay */
+.security-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 10, 10, 0.65);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10001;
+    animation: secOverlayIn 0.3s ease-out;
+    padding: 1rem;
+}
+
+@keyframes secOverlayIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Popup Card */
+.security-popup {
+    background: var(--vx-white, #ffffff);
+    width: 480px;
+    max-width: 100%;
+    border-radius: var(--vx-radius-card, 24px);
+    padding: 2.5rem 2rem 2rem;
+    text-align: center;
+    box-shadow:
+        0 24px 64px rgba(0, 0, 0, 0.25),
+        0 4px 16px rgba(0, 0, 0, 0.10);
+    animation: secPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.security-popup::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e63946, #ff6b6b, #e63946);
+    background-size: 200% 100%;
+    animation: secAccentShimmer 3s ease-in-out infinite;
+}
+
+@keyframes secPopIn {
+    from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes secAccentShimmer {
+    0%, 100% { background-position: 0% 50%; }
+    50%      { background-position: 100% 50%; }
+}
+
+/* Shield Icon */
+.security-popup__icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1.25rem;
+    background: linear-gradient(135deg, #fff0f0, #ffe0e0);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    animation: secIconPulse 2s ease-in-out infinite;
+}
+
+@keyframes secIconPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(230, 57, 70, 0.25); }
+    50%      { box-shadow: 0 0 0 12px rgba(230, 57, 70, 0); }
+}
+
+/* Title */
+.security-popup__title {
+    font-family: var(--vx-font-display, 'DM Sans', sans-serif);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--vx-black, #0a0a0a);
+    margin: 0 0 0.5rem;
+}
+
+/* Body text */
+.security-popup__text {
+    font-family: var(--vx-font-body, 'Inter', sans-serif);
+    font-size: 0.875rem;
+    line-height: 1.65;
+    color: var(--vx-dark-gray, #555);
+    margin: 0 0 0.25rem;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Detail rows */
+.security-popup__details {
+    background: var(--vx-off-white, #f8f7f5);
+    border-radius: 16px;
+    padding: 0.75rem 1.25rem;
+    margin: 1.25rem 0;
+    text-align: left;
+    border: 1px solid #f0eeec;
+}
+
+.security-popup__detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.55rem 0;
+    font-family: var(--vx-font-body, 'Inter', sans-serif);
+    font-size: 0.8rem;
+}
+
+.security-popup__detail-row + .security-popup__detail-row {
+    border-top: 1px solid var(--vx-light-gray, #eae8e6);
+}
+
+.security-popup__detail-label {
+    color: var(--vx-mid-gray, #9a9a9a);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.625rem;
+}
+
+.security-popup__detail-value {
+    color: var(--vx-black, #0a0a0a);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.security-popup__detail-value--danger {
+    color: #e63946;
+    font-weight: 800;
+}
+
+/* ── Threat Level Badge ──────────────────────────────────────── */
+.security-popup__threat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--vx-font-body, 'Inter', sans-serif);
+    font-size: 0.7rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--threat-color, #f97316);
+    background: color-mix(in srgb, var(--threat-color, #f97316) 10%, transparent);
+    padding: 0.3rem 0.75rem;
+    border-radius: 999px;
+    border: 1px solid color-mix(in srgb, var(--threat-color, #f97316) 25%, transparent);
+}
+
+.security-popup__threat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--threat-color, #f97316);
+    flex-shrink: 0;
+}
+
+/* Critical pulse animation */
+.security-popup__threat--critical .security-popup__threat-dot {
+    animation: threatDotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes threatDotPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+    50%      { box-shadow: 0 0 0 5px rgba(239, 68, 68, 0); }
+}
+
+/* Note */
+.security-popup__note {
+    font-family: var(--vx-font-body, 'Inter', sans-serif);
+    font-size: 0.75rem;
+    color: var(--vx-mid-gray, #9a9a9a);
+    line-height: 1.6;
+    margin: 0.5rem 0 1.5rem;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ── Action Buttons ─────────────────────────────────────────── */
+.security-popup__actions {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+}
+
+.security-popup__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    font-family: var(--vx-font-body, 'Inter', sans-serif);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: var(--vx-radius-btn, 14px);
+    padding: 0.85rem 1.75rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    flex: 1;
+}
+
+.security-popup__btn:focus-visible {
+    outline: 2px solid var(--vx-black, #0a0a0a);
+    outline-offset: 2px;
+}
+
+/* Primary — Secure Account */
+.security-popup__btn--primary {
+    background: var(--vx-black, #0a0a0a);
+    color: var(--vx-white, #ffffff);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.security-popup__btn--primary:hover {
+    background: var(--vx-dark-gray, #333);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* Secondary — Dismiss */
+.security-popup__btn--secondary {
+    background: var(--vx-off-white, #f8f7f5);
+    color: var(--vx-black, #0a0a0a);
+    border: 1.5px solid #f0eeec;
+}
+
+.security-popup__btn--secondary:hover {
+    background: #efeeec;
+    border-color: #ddd;
+    transform: translateY(-1px);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .security-popup {
+        padding: 2rem 1.25rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .security-popup__title {
+        font-size: 1.2rem;
+    }
+
+    .security-popup__actions {
+        flex-direction: column-reverse;
+    }
+
+    .security-popup__btn {
+        width: 100%;
+    }
+
+    .security-popup__detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .security-popup__detail-value {
+        text-align: left;
+    }
+}

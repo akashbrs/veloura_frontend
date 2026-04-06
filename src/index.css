@@ -1,0 +1,348 @@
+/* ==========================================================================
+   VELOURA — Global Design System
+   ========================================================================== */
+
+/* Google Fonts — Playfair Display (brand logo), DM Sans (headings), Inter (body) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,900;1,9..40,300;1,9..40,400&family=Inter:wght@300;400;500;600&display=swap');
+
+@import "tailwindcss";
+
+/* CSS Custom Properties — VELOURA Palette */
+:root {
+  --vx-black: #0a0a0a;
+  --vx-white: #ffffff;
+  --vx-off-white: #f5f5f5;
+  --vx-light-gray: #e8e8e8;
+  --vx-mid-gray: #9a9a9a;
+  --vx-dark-gray: #3d3d3d;
+
+  --vx-font-brand: 'Playfair Display', Georgia, serif;
+  --vx-font-display: 'DM Sans', system-ui, sans-serif;
+  --vx-font-body: 'Inter', system-ui, sans-serif;
+
+  --vx-container: 1440px;
+  --vx-radius-card: 20px;
+  --vx-radius-btn: 999px;
+  --vx-transition: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   Base Reset & Body
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--vx-font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--vx-white);
+  color: var(--vx-black);
+  overflow-x: hidden;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vx-light-gray);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vx-mid-gray);
+}
+
+/* ==========================================================================
+   Typography Utilities
+   ========================================================================== */
+.vx-display {
+  font-family: var(--vx-font-display);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+}
+
+.vx-heading {
+  font-family: var(--vx-font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.vx-label {
+  font-family: var(--vx-font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Container
+   ========================================================================== */
+.vx-container {
+  width: 100%;
+  max-width: var(--vx-container);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .vx-container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .vx-container {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+.vx-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--vx-font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--vx-radius-btn);
+  padding: 1rem 2.5rem;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--vx-transition);
+  white-space: nowrap;
+}
+
+.vx-btn-primary {
+  background: var(--vx-black);
+  color: var(--vx-white);
+}
+
+.vx-btn-primary:hover {
+  background: var(--vx-dark-gray);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.vx-btn-outline {
+  background: transparent;
+  color: var(--vx-black);
+  border: 1.5px solid var(--vx-black);
+}
+
+.vx-btn-outline:hover {
+  background: var(--vx-black);
+  color: var(--vx-white);
+  transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+.vx-card {
+  background: var(--vx-white);
+  border-radius: var(--vx-radius-card);
+  overflow: hidden;
+  transition: transform 0.5s var(--vx-transition), box-shadow 0.5s var(--vx-transition);
+}
+
+.vx-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.1);
+}
+
+.vx-img-zoom img {
+  transition: transform 0.7s var(--vx-transition);
+}
+
+.vx-img-zoom:hover img {
+  transform: scale(1.06);
+}
+
+/* ==========================================================================
+   Section Spacing
+   ========================================================================== */
+.vx-section {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 1024px) {
+  .vx-section {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+.vx-section-sm {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* ==========================================================================
+   Scroll Reveal — Initial hidden state applied via JS hook
+   ========================================================================== */
+[data-animate] {
+  will-change: opacity, transform;
+}
+
+/* ==========================================================================
+   Marquee Animation
+   ========================================================================== */
+@keyframes vx-marquee {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.vx-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: vx-marquee 20s linear infinite;
+}
+
+.vx-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ==========================================================================
+   Scroll Indicator Bounce
+   ========================================================================== */
+@keyframes vx-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translateY(8px);
+    opacity: 1;
+  }
+}
+
+.vx-scroll-indicator {
+  animation: vx-bounce 2s ease-in-out infinite;
+}
+
+/* ==========================================================================
+   Premium Toast Overrides (VELOURA 10/10 Luxury)
+   ========================================================================== */
+.premium-toast {
+  background: #111111;
+  color: #FFFFFF;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.35),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 340px;
+  width: auto;
+  min-width: 280px;
+  backdrop-filter: blur(10px);
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-toastIn {
+  animation: toastSlideIn 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.Toastify__toast-container {
+  padding: 0 !important;
+  width: auto !important;
+  max-width: 100vw;
+  z-index: 10000 !important;
+}
+
+.Toastify__toast-container--bottom-right {
+  bottom: 32px !important;
+  right: 32px !important;
+}
+
+.Toastify__toast {
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin-bottom: 0.75rem !important;
+  overflow: visible !important;
+}
+
+.Toastify__toast-body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.Toastify__close-button {
+  display: none !important;
+}
+
+/* Responsive adjustment for Mobile */
+@media (max-width: 640px) {
+  .Toastify__toast-container {
+    left: auto !important;
+    right: 16px !important;
+    bottom: 24px !important;
+    transform: none !important;
+    width: auto !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
+  .Toastify__toast-container--bottom-right {
+    bottom: 24px !important;
+    right: 16px !important;
+  }
+
+  .premium-toast {
+    max-width: calc(100vw - 32px);
+    width: 320px;
+  }
+}
