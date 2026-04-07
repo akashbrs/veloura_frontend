@@ -1,4 +1,3 @@
-import api from '@/services/api';
 import type { Product } from '@/types';
 import { STYLE_FILTER_REGISTRY } from '@/utils/filterProducts';
 

@@ -31,14 +31,14 @@ const saveLocalAddresses = (addresses: Address[]) => {
 
 export const fetchAddresses = createAsyncThunk(
     'address/fetchAddresses',
-    async (_, { rejectWithValue }) => {
+    async () => {
         return getLocalAddresses();
     }
 );
 
 export const addAddress = createAsyncThunk(
     'address/addAddress',
-    async (addressData: Omit<Address, '_id' | 'user'>, { rejectWithValue }) => {
+    async (addressData: Omit<Address, '_id' | 'user'>) => {
         const addresses = getLocalAddresses();
         const newAddress = { ...addressData, _id: Date.now().toString() } as Address;
         
@@ -54,7 +54,7 @@ export const addAddress = createAsyncThunk(
 
 export const updateAddress = createAsyncThunk(
     'address/updateAddress',
-    async ({ id, data }: { id: string, data: Partial<Address> }, { rejectWithValue }) => {
+    async ({ id, data }: { id: string, data: Partial<Address> }) => {
         let addresses = getLocalAddresses();
         const index = addresses.findIndex(a => a._id === id);
         if (index !== -1) {
@@ -68,7 +68,7 @@ export const updateAddress = createAsyncThunk(
 
 export const deleteAddress = createAsyncThunk(
     'address/deleteAddress',
-    async (id: string, { rejectWithValue }) => {
+    async (id: string) => {
         let addresses = getLocalAddresses();
         addresses = addresses.filter(a => a._id !== id);
         saveLocalAddresses(addresses);
@@ -78,7 +78,7 @@ export const deleteAddress = createAsyncThunk(
 
 export const setDefaultAddress = createAsyncThunk(
     'address/setDefaultAddress',
-    async (id: string, { rejectWithValue }) => {
+    async (id: string) => {
         let addresses = getLocalAddresses();
         addresses.forEach(a => { a.isDefault = a._id === id; });
         saveLocalAddresses(addresses);

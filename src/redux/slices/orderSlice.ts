@@ -35,7 +35,7 @@ const saveLocalOrders = (orders: Order[]) => {
 
 export const createOrder = createAsyncThunk(
     'orders/create',
-    async (orderData: any, { rejectWithValue }) => {
+    async (orderData: any) => {
         let orders = getLocalOrders();
         const newOrder = { 
             ...orderData, 
@@ -62,14 +62,14 @@ export const getOrderDetails = createAsyncThunk(
 
 export const listMyOrders = createAsyncThunk(
     'orders/myOrders',
-    async (_, { rejectWithValue }) => {
+    async () => {
         return getLocalOrders();
     }
 );
 
 export const listAllOrders = createAsyncThunk(
     'orders/allOrders',
-    async (_, { rejectWithValue }) => {
+    async () => {
         return getLocalOrders();
     }
 );
@@ -105,7 +105,7 @@ export const updateOrderToDelivered = createAsyncThunk(
 
 export const cancelOrder = createAsyncThunk(
     'orders/cancel',
-    async ({ id, reason, note }: { id: string, reason: string, note?: string }, { rejectWithValue }) => {
+    async ({ id }: { id: string, reason: string, note?: string }, { rejectWithValue }) => {
         let orders = getLocalOrders();
         const index = orders.findIndex(o => o._id === id);
         if (index !== -1) {
@@ -119,7 +119,7 @@ export const cancelOrder = createAsyncThunk(
 
 export const reorderItems = createAsyncThunk(
     'orders/reorder',
-    async (id: string, { rejectWithValue }) => {
+    async (_id: string) => {
         // Just mock success since it doesn't need to actually trigger the backend
         return { success: true };
     }

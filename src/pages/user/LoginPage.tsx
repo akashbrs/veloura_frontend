@@ -7,6 +7,7 @@ import { toastService } from '@/services/toastService';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
 
+
 /* ─── Google Icon ───────────────────────────────────────────────────────── */
 const GoogleIcon = () => (
     <svg className="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24">
@@ -74,14 +75,21 @@ const FloatInput = ({ id, label, type = 'text', value, onChange, required, autoC
                 ${error ? 'border-red-400' : focused ? 'border-[#0a0a0a]' : 'border-[#d0d0d0]'}`}>
                 <div className="relative flex-1 pt-5 pb-1.5">
                     <input
-                        id={id} type={type} value={value}
+                        id={id}
+                        type={type}
+                        value={value}
                         onChange={e => onChange(e.target.value)}
                         onFocus={() => setFocused(true)}
                         onBlur={() => setFocused(false)}
-                        required={required} autoComplete={autoComplete}
+                        required={required}
+                        autoComplete={autoComplete}
                         placeholder=" "
                         className="w-full bg-transparent text-[#0a0a0a] text-sm outline-none peer"
-                        style={{ WebkitTextSecurity: type === 'password' ? 'disc' : 'none' }}
+                        style={
+                            type === 'password'
+                                ? ({ WebkitTextSecurity: "disc" } as React.CSSProperties)
+                                : undefined
+                        }
                     />
                     <label htmlFor={id} className={`absolute left-0 pointer-events-none select-none font-medium transition-all duration-200
                         ${lifted ? 'top-0 text-[9px] tracking-widest uppercase' : 'top-1/2 -translate-y-1/2 text-sm'}
@@ -138,7 +146,7 @@ const LoginPage = () => {
     const location = useLocation();
     const { userInfo, loading, error, success } = useSelector((s: RootState) => s.auth);
     const redirect = location.search ? location.search.split('=')[1] : '/';
-    
+
     const switchMode = useCallback((toLogin: boolean) => {
         setIsLogin(toLogin);
         setUsername(''); setEmail(''); setPassword(''); setConfirmPassword('');

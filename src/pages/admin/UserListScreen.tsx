@@ -27,7 +27,7 @@ const UserListScreen = () => {
         }
     };
 
-    const roleChangeHandler = (id: string, role: string) => {
+    const roleChangeHandler = (id: string, role: 'user' | 'admin') => {
         if (id === userInfo?._id) {
             toast.error('You cannot change your own role to avoid lockout');
             return;
@@ -84,7 +84,7 @@ const UserListScreen = () => {
                                             <FiShield className={`absolute left-3 top-1/2 -translate-y-1/2 ${user.role === 'admin' ? 'text-blue-600' : 'text-gray-400'}`} />
                                             <select
                                                 value={user.role}
-                                                onChange={(e) => roleChangeHandler(user._id, e.target.value)}
+                                                onChange={(e) => roleChangeHandler(user._id, e.target.value as 'user' | 'admin')}
                                                 className={`
                                                     pl-9 pr-8 py-2 rounded-lg text-xs font-bold uppercase appearance-none border-none focus:ring-2 focus:ring-blue-500 transition-all
                                                     ${user.role === 'admin' ? 'bg-blue-50 text-blue-700' : 'bg-gray-50 text-gray-600'}

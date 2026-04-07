@@ -49,7 +49,7 @@ export const register = createAsyncThunk(
 // --- Mocked Legacy Thunks (For UI Compatibility) ---
 export const fetchUserIfNeeded = createAsyncThunk(
     'auth/fetchUserIfNeeded',
-    async (_, { getState, rejectWithValue }) => {
+    async (_, { getState }) => {
         const state = getState() as any;
         return state.auth.userInfo;
     }
@@ -80,28 +80,28 @@ export const updateSizes = createAsyncThunk(
 
 export const deleteMyAccount = createAsyncThunk(
     'auth/deleteMyAccount',
-    async (_, { rejectWithValue }) => {
+    async () => {
         return null;
     }
 );
 
 export const listUsers = createAsyncThunk(
     'auth/listUsers',
-    async (_, { rejectWithValue }) => {
+    async () => {
         return [];
     }
 );
 
 export const deleteUser = createAsyncThunk(
     'auth/deleteUser',
-    async (id: string, { rejectWithValue }) => {
+    async (id: string) => {
         return id;
     }
 );
 
 export const updateUserRole = createAsyncThunk(
     'auth/updateUserRole',
-    async ({ id, role }: { id: string, role: string }, { rejectWithValue }) => {
+    async ({ id, role }: { id: string, role: 'user' | 'admin' }) => {
         return { id, role };
     }
 );
@@ -186,7 +186,7 @@ const authSlice = createSlice({
         });
 
         // updateUserRole
-        builder.addCase(updateUserRole.fulfilled, (state, action: PayloadAction<{id: string, role: string}>) => {
+        builder.addCase(updateUserRole.fulfilled, (state, action: PayloadAction<{id: string, role: 'user' | 'admin'}>) => {
             const user = state.users.find(u => u._id === action.payload.id);
             if (user) user.role = action.payload.role;
         });

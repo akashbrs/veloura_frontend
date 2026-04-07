@@ -21,6 +21,7 @@ export interface User {
   };
   role: 'user' | 'admin';
   token?: string;
+  access_token?: string;
   createdAt?: string;
 }
 

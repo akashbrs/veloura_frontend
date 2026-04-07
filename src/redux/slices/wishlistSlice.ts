@@ -41,7 +41,7 @@ const saveLocalWishlist = (items: WishlistProduct[]) => {
 
 export const fetchWishlist = createAsyncThunk(
     'wishlist/fetch',
-    async (_, { rejectWithValue }) => {
+    async () => {
         return getLocalWishlist();
     }
 );
@@ -54,7 +54,7 @@ export const addToWishlist = createAsyncThunk(
         price?: number;
         image?: string;
         category?: string;
-    }, { rejectWithValue }) => {
+    }, ) => {
         let items = getLocalWishlist();
         if (!items.find(i => i.productId === payload.productId)) {
             items.push({
@@ -74,7 +74,7 @@ export const addToWishlist = createAsyncThunk(
 
 export const removeFromWishlist = createAsyncThunk(
     'wishlist/remove',
-    async (productId: string, { rejectWithValue }) => {
+    async (productId: string) => {
         let items = getLocalWishlist();
         items = items.filter(i => i.productId !== productId);
         saveLocalWishlist(items);
@@ -84,7 +84,7 @@ export const removeFromWishlist = createAsyncThunk(
 
 export const moveWishlistToCart = createAsyncThunk(
     'wishlist/moveToCart',
-    async (payload: { productId: string; size: string; quantity?: number }, { rejectWithValue }) => {
+    async (payload: { productId: string; size: string; quantity?: number }) => {
         let items = getLocalWishlist();
         items = items.filter(i => i.productId !== payload.productId);
         saveLocalWishlist(items);
@@ -95,7 +95,7 @@ export const moveWishlistToCart = createAsyncThunk(
 
 export const moveAllWishlistToCart = createAsyncThunk(
     'wishlist/moveAllToCart',
-    async (size: string = 'M', { rejectWithValue }) => {
+    async (_size: string = 'M') => {
         saveLocalWishlist([]);
         return { wishlistProducts: [] };
     }
