@@ -3,7 +3,7 @@ import { toastService } from '@/services/toastService';
 
 // Base API configuration
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_URL || 'https://api.veloura.prime-wave.tech/api/',
+    baseURL: (import.meta.env.VITE_API_URL || 'https://api.veloura.prime-wave.tech/api/').replace(/\/$/, '') + '/',
     withCredentials: true,
     headers: {
         'Content-Type': 'application/json',

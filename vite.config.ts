@@ -13,11 +13,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8001',
+        target: 'https://api.veloura.prime-wave.tech',
         changeOrigin: true,
       },
       '/security': {
-        target: 'http://localhost:8001',
+        target: 'https://api.veloura.prime-wave.tech',
         changeOrigin: true,
       }
     }
